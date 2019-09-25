@@ -2,10 +2,11 @@ const express = require('express')
 const graphqlHTTP = require('express-graphql')
 const schema = require('./schema/schema')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
+// Config Mangoose
 mongoose.set('useNewUrlParser', true)
 mongoose.set('useUnifiedTopology', true)
-
 mongoose.connect(
     'mongodb+srv://freonzx:235689a@cluster0-a4fmk.mongodb.net/test?retryWrites=true&w=majority'
 )
@@ -14,6 +15,9 @@ mongoose.connection.once('open', () => {
 })
 
 const app = express()
+
+// Allow CORS
+app.use(cors())
 
 app.use(
     '/graphql',
